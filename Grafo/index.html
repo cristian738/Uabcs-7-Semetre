@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TREN</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+<body>
+<center>
+<H2>Encuentra la Ruta mas Corta</H2>
+	<canvas id="myCanvas" width="1030" height="400" style="border:1px solid blue;   background-color: #F5F5F5;
+">
+	<img id="a" width="50" height="50" src="img/a.png" >
+	<img id="b" width="50" height="50" src="img/b.png" >
+	<img id="c" width="50" height="50" src="img/c.png" >
+	<img id="d" width="50" height="50" src="img/d.png" >
+	<img id="e" width="50" height="50" src="img/e.png" >
+
+	<img id="uno" width="50" height="50" src="img/uno.png" >
+	<img id="dos" width="50" height="50" src="img/dos.png" >
+	<img id="tres" width="50" height="50" src="img/tres.png" >
+	<img id="cua" width="50" height="50" src="img/cuatro.png" >
+	<img id="cin" width="50" height="50" src="img/cinco.png" >
+
+</canvas>
+	<br></br>
+		<label>Ingrese Origen:  </label>
+		<input type="text" id="entrada">
+		
+		<label>Ingrese  Destino : </label>
+		
+		<input type="text" id="salida">
+	<br></br>
+	<button id="boton"  onclick=""> Calcular</button>
+	<br></br>
+	
+</center>
+</body>
+</html>
+<script type="text/javascript">
+	window.onload = function() {
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("a");
+    var img2 = document.getElementById("b");
+    var img3 = document.getElementById("c");
+    var img4 = document.getElementById("d");
+    var img5 = document.getElementById("e");
+
+    var img6 = document.getElementById("uno");
+    var img7 = document.getElementById("dos");
+    var img8 = document.getElementById("tres");
+    var img9 = document.getElementById("cua");
+    var img10 = document.getElementById("cin");
+    
+    //ctx.drawImage(img6, 0, 0);
+    ctx.drawImage(img, 500, 40,40,40);
+    ctx.drawImage(img2, 400, 100,40,40);
+    ctx.drawImage(img3, 600, 100,40,40);
+    ctx.drawImage(img4, 430, 200,40,40);
+    ctx.drawImage(img5, 560, 200,40,40);
+
+     ctx.drawImage(img10, 440, 55,20,20);
+     ctx.drawImage(img8, 570, 55,25,25);
+	ctx.drawImage(img8, 400, 170,25,25);
+	ctx.drawImage(img7, 510, 110,20,20);
+	ctx.drawImage(img6, 510, 210,25,25);
+	ctx.drawImage(img10, 610, 170,20,20);
+
+	
+
+}
+
+
+	$("#boton").click(function () {
+
+		var entrada = document.getElementById('entrada').value;
+		var salida = document.getElementById('salida').value;
+		var lista = document.getElementById("resul");
+
+		function PriorityQueue () {
+		  this._nodes = [];
+
+		  this.enqueue = function (priority, key) {
+		    this._nodes.push({key: key, priority: priority });
+		    this.sort();
+		  }
+		  this.dequeue = function () {
+		    return this._nodes.shift().key;
+		  }
+		  this.sort = function () {
+		    this._nodes.sort(function (a, b) {
+		      return a.priority - b.priority;
+		    });
+		  }
+		  this.isEmpty = function () {
+		    return !this._nodes.length;
+		  }
+		}
+
+		/**
+		 * Pathfinding starts here
+		 */
+		function Graph(){
+		  var INFINITY = 1/0;
+		  this.vertices = {};
+
+		  this.addVertex = function(name, edges){
+		    this.vertices[name] = edges;
+		  }
+
+		  this.shortestPath = function (start, finish) {
+		    var nodes = new PriorityQueue(),
+		        distances = {},
+		        previous = {},
+		        path = [],
+		        smallest, vertex, neighbor, alt;
+
+		    for(vertex in this.vertices) {
+		      if(vertex === start) {
+		        distances[vertex] = 0;
+		        nodes.enqueue(0, vertex);
+		      }
+		      else {
+		        distances[vertex] = INFINITY;
+		        nodes.enqueue(INFINITY, vertex);
+		      }
+
+		      previous[vertex] = null;
+		    }
+
+		    while(!nodes.isEmpty()) {
+		      smallest = nodes.dequeue();
+
+		      if(smallest === finish) {
+		        path;
+
+		        while(previous[smallest]) {
+		          path.push(smallest);
+		          smallest = previous[smallest];
+		        }
+
+		        break;
+		      }
+
+		      if(!smallest || distances[smallest] === INFINITY){
+		        continue;
+		      }
+
+		      for(neighbor in this.vertices[smallest]) {
+		        alt = distances[smallest] + this.vertices[smallest][neighbor];
+
+		        if(alt < distances[neighbor]) {
+		          distances[neighbor] = alt;
+		          previous[neighbor] = smallest;
+
+		          nodes.enqueue(alt, neighbor);
+		        }
+		      }
+		    }
+
+		    return path;
+		  }
+		}
+
+		var g = new Graph();
+
+		g.addVertex('A', {B: 5, C: 3});
+		g.addVertex('B', {A: 5, D: 3, C: 2});
+		g.addVertex('C', {A: 3, B: 2, E: 5});
+		g.addVertex('D', {B: 3, E: 1});
+		g.addVertex('E', {C: 5, D: 1});
+
+
+		// Log test, with the addition of reversing the path and prepending the first node so it's more readable
+		//lista.innerHTML = lista.innerHTML + g.shortestPath(entrada, salida).concat([entrada]).reverse();
+		alert(g.shortestPath(entrada, salida).concat([entrada]).reverse());
+
+		});
+
+		</script>
