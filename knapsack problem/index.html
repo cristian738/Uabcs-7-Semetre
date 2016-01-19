@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema Mochila</title>
+</head>
+<body>
+<center>
+	<h2>Utiles</h2>
+	<h3>Ingrese Peso de la Mochila </h3>
+	<input type="text" id="pess" name="name" placeholder="KG"> 
+	<br> </br>
+	<table border="2">
+		<tr>
+		  <td><strong>Prioridad</strong></td>
+		  <td><strong>Utiles</strong></td>
+		  <td><strong>Pesos</strong></td>
+		</tr>
+		 
+		<tr>
+		  <td>3</td>
+		  <td>mapa</td>
+		  <td>68</td>
+		</tr>	 
+		<tr>
+		  <td>1</td>
+		  <td>compas</td>
+		  <td>13</td>
+		</tr>	 
+		<tr>
+		  <td>2</td>
+		  <td>calculadora</td>
+		  <td>153</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>borrador</td>
+		  <td>50</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>lap top</td>
+		  <td>9</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>cuaderno</td>
+		  <td>15</td>
+		</tr>
+		<tr>
+		  <td>3</td>
+		  <td>lapiz</td>
+		  <td>27</td>
+		</tr>
+		<tr>
+		  <td>3</td>
+		  <td>pluma</td>
+		  <td>39</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>libro</td>
+		  <td>23</td>
+		</tr>
+		<tr>
+		  <td>3</td>
+		  <td>cheve</td>
+		  <td>52</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>camara</td>
+		  <td>11</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>sueter</td>
+		  <td>32</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>camisa</td>
+		  <td>24</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>lentes</td>
+		  <td>48</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>celular</td>
+		  <td>73</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>I-pod</td>
+		  <td>42</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>cargador</td>
+		  <td>43</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>dinero</td>
+		  <td>22</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>xbox</td>
+		  <td>7</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>colores</td>
+		  <td>18</td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>tijeras</td>
+		  <td>4</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>corrector</td>
+		  <td>30</td>
+		</tr>
+		</table>
+		<br>
+		<input type="button" name="Boton3" value="Calcular" OnClick="findBestPack();">
+		</br>
+	</center>	
+</body>
+</html>
+
+<script type="text/javascript">
+var data= [
+  {name: 'lap top',                weight:  9, value:150, pieces:1},
+  {name: 'compas',                 weight: 13, value: 35, pieces:1},
+  {name: 'calculadora',            weight:153, value:200, pieces:2},
+  {name: 'borrador',               weight: 50, value: 60, pieces:2},
+  {name: 'cuaderno',               weight: 30, value: 60, pieces:2},
+  {name: 'mapa',                 weight: 68, value: 45, pieces:3},
+  {name: 'lapiz',                  weight: 27, value: 60, pieces:3},
+  {name: 'pluma',                  weight: 39, value: 40, pieces:3},
+  {name: 'libro',                  weight: 23, value: 30, pieces:1},
+  {name: 'cheve',                  weight: 52, value: 10, pieces:3},
+  {name: 'camara',         		   weight: 11, value: 70, pieces:1},
+  {name: 'sueter',                 weight: 32, value: 30, pieces:1},
+  {name: 'camisa',                 weight: 24, value: 15, pieces:2},
+  {name: 'lentes',                 weight: 48, value: 10, pieces:2},
+  {name: 'celular',                weight: 73, value: 40, pieces:1},
+  {name: 'i-pod',   			   weight: 42, value: 70, pieces:1},
+  {name: 'cargador',			  weight: 43, value: 75, pieces:1},
+  {name: 'dinero',                weight: 22, value: 80, pieces:1},
+  {name: 'xbox',                   weight:  7, value: 20, pieces:1},
+  {name: 'colores',                  weight: 18, value: 12, pieces:2},
+  {name: 'tijeras',                  weight:  4, value: 50, pieces:1},
+  {name: 'corrector',                   weight: 30, value: 10, pieces:2}
+];
+ 
+function findBestPack() {
+	var m= [[0]]; 
+	var b= [[0]]; 
+	var opts= [0]; 
+	var P= [1]; 
+	var choose= 0;
+
+	var valor = document.getElementById("pess").value;
+
+
+	for (var j= 0; j<data.length; j++) {
+		opts[j+1]= opts[j]+data[j].pieces; 
+		P[j+1]= P[j]*(1+data[j].pieces); 
+	}
+	for (var j= 0; j<opts[data.length]; j++) {
+		m[0][j+1]= b[0][j+1]= 0; 
+	}
+	for (var w=1; w<=valor; w++) {
+		m[w]= [0];
+		b[w]= [0];
+		for (var j=0; j<data.length; j++) {
+			var N= data[j].pieces; 
+			var base= opts[j]; 
+			for (var n= 1; n<=N; n++) {
+				var W= n*data[j].weight; 
+				var s= w>=W ?1 :0; 
+				var v= s*n*data[j].value; 
+				var I= base+n; 
+				var wN= w-s*W; 
+				var C= n*P[j] + b[wN][base]; 
+				m[w][I]= Math.max(m[w][I-1], v+m[wN][base]); 
+				choose= b[w][I]= m[w][I]>m[w][I-1] ?C :b[w][I-1];
+			}
+		}
+	}
+	var best= [];
+	for (var j= data.length-1; j>=0; j--) {
+		best[j]= Math.floor(choose/P[j]);
+		choose-= best[j]*P[j];
+	}
+	var out='<center> <table border=2> <tr><td><b>Prioridad</b></td><td>  <b>Utiles</b> </td><th>Peso</th>';
+	//<th>unit value</th>
+	var wgt= 0;
+	var val= 0;
+	for (var i= 0; i<best.length; i++) {
+		if (0==best[i]) continue;
+		out+='</tr><tr><td>'+best[i]+'</td><td>'+data[i].name+'</td><td>'+data[i].weight+'</td><td>'
+		//data[i].value+'</td>'
+		wgt+= best[i]*data[i].weight;
+		val+= best[i]*data[i].value;
+	}
+	out+= '</tr></table><br/>Peso Total: '+wgt + ' Kg  </center>' ;
+	//out+= '<br/>Total value: '+val;
+	document.body.innerHTML= out;
+};
+
+
+</script>
