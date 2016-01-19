@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ocultar input</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+	<body>
+
+	<form>
+		<center>		
+			<input type="text" name="nom" id="nom" placeholder="nom"/>
+			<input type="text" name="ape" id="ape" placeholder="ape"/>
+			<input type="text" name="tel" id="tel" placeholder="tel"/>
+			<br>
+			<input type="button" onclick="" id="boton" class="boton" value="Ocultar" />
+			<input type="button" onclick="" id="boton2" class="boton2" value="Mostrar" />
+			</br>
+		</center>
+	</form>
+
+	</body>
+
+	<script >
+
+	$(document).ready(function(){
+
+		$(".boton").on('click',function (){
+			var cont=0;
+			var ran = Math.floor((Math.random()*10)+1);
+			
+			$("body *").each(function(i,elemento){
+
+				if(ran==cont){
+					$(elemento).hide("slow");
+					$(elemento).css('visibility','hidden');
+				}
+				cont++;
+				
+				$(".boton2").on('click',function(){
+						
+						$("body *").show("slow");
+						$(elemento).css('visibility','visible');
+							
+					});
+			});
+		});
+		//////////
+		
+	});
+		//easyphp
+					//$(elemento).show();
+					//$(elemento).css('visibility','visible');
+	</script>
+
+
+</html>

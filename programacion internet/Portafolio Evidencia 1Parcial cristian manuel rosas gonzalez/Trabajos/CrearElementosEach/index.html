@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Crear Elementos Each</title>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+	
+</head>
+
+	<body>
+		<h2>Crear Elementos </h2>
+		
+
+    <table id="tabla" >
+       <thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>TEl</th>
+			
+		</tr>
+		</thead>
+		<tbody class="campos">
+			<tr >
+				<td><input type="text" class="nombre" /></td>
+				<td><input type="text" class="apellido" /></td>
+				<td><input type="text" class="tel" /></td>
+				<td class="eliminar">Eliminar</td>
+			</tr>
+		</tbody>
+
+
+    </table>
+
+		<input type="button" id="boton" value="Agregar">
+		<input type="button" id="inser" class="ok" value="JSON">
+	
+
+	</body>
+
+
+</html>
+
+
+<script type="text/javascript">
+	$("#boton").on('click',function() {
+		// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+		 for(var i=0;i<10;i++){
+			$("#tabla tbody tr:eq(0)").clone().removeClass('campos').appendTo("#tabla tbody");
+		}
+	});
+
+	$(document).on("click",".eliminar",function(){
+		var parent = $(this).parents().get(0);
+		$(parent).remove();
+	});
+
+	$(".ok").on('click',function(){
+
+		$.getJSON("jsss.json",function(data){
+			console.log(data)	;
+			$.each(data, function(i, otro){
+
+            $(".campos ").append("<tr><td> <input  value="+otro.nombre+"></input></td>" + 
+            					"<td><input value="+otro.apellido+"></input></td>"
+            					 + "<td><input value="+otro.pass+"></input></td>" +
+            					  "<td>"+ "Eliminar" +"</td></tr>" )
+       		 });
+
+		})
+	});
+
+</script>
+
+<script ></script>

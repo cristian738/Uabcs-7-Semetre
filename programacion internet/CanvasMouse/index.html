@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mouse Dibujar</title>
+</head>
+<body onmousemove="pintar(event)" >
+
+	<canvas id="canvas" width="1200" height="600"> </canvas>
+
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.fillStyle = "#000";
+		ctx.fillRect (0, 0, 1200, 600);
+		var posx = 0;
+		var posy = 0;
+
+		function pintar(e){
+			posx = e.clientX;
+			posy = e.clientY;
+			ctx.fillStyle = "blue";
+			ctx.fillRect (posx, posy, 3, 3);
+		}
+
+</script>

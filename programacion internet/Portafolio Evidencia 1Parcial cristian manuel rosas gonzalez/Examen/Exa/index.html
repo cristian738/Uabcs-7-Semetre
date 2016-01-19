@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+	<body>
+		<center><h3>Formulario Examen </h3>
+		<form id="forma" method="post">
+			<label>Nombre:</label>
+			<input  type="text" class="nombre"  id="nombre" name="nombre"  />
+			
+			<label>Edad:</label>
+			<input  type="text" class="edad" id="edad" name="edad"  />
+			
+			<label>Genero:</label>
+			<input  type="text" class="genero" id="genero" name="genero"  />
+			</br>
+			<center>
+			<input type="button" class="botones" value="Enviar" />
+			<input type="button" class="boton" value="Mostrar" />
+			</center>
+		</form>
+
+		 <table id="tabla" >
+		       <thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Edad</th>
+					<th>Genero</th>
+					
+				</tr>
+				</thead>
+				<tbody class="campos">
+					<tr >
+						
+						
+					</tr>
+				</tbody>
+
+
+		    </table>
+		    </center>
+	</body>
+
+</html>
+
+<script type="text/javascript">
+	$(".botones").on('click',function() {
+			$nombre=$(".nombre").val();
+			$edad=$(".edad").val();
+			$genero=$(".genero").val();
+			$para={'nombre' : $nombre , 'edad' : $edad , 'genero' : $genero};
+			$.ajax({
+				url: "enviar.php",
+				type: 'post',
+				data: $para,				
+				success: function(data) {
+				alert("Enviado Con Exicto");
+							}
+
+			});		
+	});
+
+	$(".boton").on('click',function(){
+			$.getJSON("crear.php",function(data){
+			
+			$.each(data, function(i, otro){
+
+            $(".campos ").append("<tr><td> <input  value="+otro.nombre+"></input></td>" + 
+            					"<td><input value="+otro.edad+"></input></td>"
+            					 + "<td><input value="+otro.genero+"></input></td></tr>" );
+       		 });
+
+		})
+	});
+
+</script>
+
+

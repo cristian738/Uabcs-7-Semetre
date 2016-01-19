@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script src="jquery.js" type="text/javascript"></script>
+		<script src="maskara.js" type="text/javascript"></script>
+		
+		<link rel="stylesheet" href="framework/css/bootstrap.css">
+		<link rel="stylesheet" href="style.css">
+		<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+	</head>
+	
+	<body>
+		<div class="ibody">
+			<div class="jumbotron">
+				<h1>Registro Niños</h1>
+			</div>
+			<div class="fcontacto">
+				<div class="logito">
+					<img src="logito.png" alt="Contactame">
+				</div>
+				<form method="post" name="fcontacto" id="fcontacto" action="formulario.php">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Tu Nombre:</label>
+							<input title="Ingrese Nombre" type="text" name="name" id="name" class="form-control"  required />
+							<strong><?php echo $mensaje;?></strong>
+						</div>
+
+						<div class="col-md-6">
+							<label>Tus Apellidos:</label>
+							<input title="Ingrese Apellido" type="text" name="ape" id="ape" class="form-control" />
+						</div>
+					</div>
+					<label>Telefono:</label>
+					<input type="tel" title="ejemplo:612155034" name="tel" id="tel" class="form-control" pattern="[0-9]{9}" required/>
+					<label>Correo:</label>
+					<input type="email" name="correo" id="correo" class="form-control" required/>
+					<label>Tu Direccion:</label>
+					<textarea title="Ingrese su Direccion" name="mensaje" id="mensaje" cols="20" rows="10" class="form-control" required/></textarea>
+					<input type="submit" class="btn btn-info"  value="Enviar">
+
+					<div id="respuesta" style="display: none;"></div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">//mascaras
+	jQuery(function($){
+	   $("#tel").mask("(999) 999-9999");
+	    $("#name").mask("aaaaaa");
+	});//app server
+
+</script>
+
+
+

@@ -1,0 +1,26 @@
+{
+    "colegio": "Colegio De Las Almas Inocentes",
+    "estudiantes": [
+        {
+            "nombre": "Cali",
+            "apellidos": "Rojas",
+            "nota": 75.4,
+            "pais": "Costa Rica"
+        },
+        {
+            "nombre": "Pedro",
+            "apellidos": "Pérez",
+            "nota": 92,
+            "pais": "México"
+        },
+        {
+            "nombre": "Santiago",
+            "apellidos": "Rojas",
+            "nota": 97.7,
+            "pais": "Costa Rica"
+        }
+    ],
+    "profesores": [
+        "Marco Polo", "Leonardo Alpizar", "Juan De La Mancha"
+    ]
+}
